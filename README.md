@@ -3,20 +3,20 @@ A **feature-rich E-commerce Platform** built with **Laravel 12** that enables us
 --
 ## 🚀 Features
 ### User Features
-✅ **Product Catalog** – Browse products with detailed information and images
-✅ **Shopping Cart** – Add, update, and remove items with real-time quantity validation
-✅ **User Authentication** – Register, log in, and manage personal information
-✅ **Checkout Process** – Secure, streamlined purchasing with shipping information collection
-✅ **Order Tracking** – View order history and current order status
-✅ **Responsive Design** – Optimized experience on all devices
+✅ **Product Catalog** – Browse products with detailed information and images <br>
+✅ **Shopping Cart** – Add, update, and remove items with real-time quantity validation <br>
+✅ **User Authentication** – Register, log in, and manage personal information <br>
+✅ **Checkout Process** – Secure, streamlined purchasing with shipping information collection <br>
+✅ **Order Tracking** – View order history and current order status <br>
+✅ **Responsive Design** – Optimized experience on all devices <br>
 
 ### Admin Features
-✅ **Dashboard Analytics** – Visualize sales data with interactive charts
-✅ **Order Management** – Process orders with status updates (pending, processing, shipped, delivered)
-✅ **Inventory Control** – Add, edit, and track product stock levels
-✅ **User Management** – View and manage customer accounts
-✅ **Sales Reports** – Generate revenue and sales performance reports
-✅ **New Order Notifications** – Real-time alerts when customers place orders
+✅ **Dashboard Analytics** – Visualize sales data with interactive charts <br>
+✅ **Order Management** – Process orders with status updates (pending, processing, shipped, delivered) <br>
+✅ **Inventory Control** – Add, edit, and track product stock levels <br>
+✅ **User Management** – View and manage customer accounts <br>
+✅ **Sales Reports** – Generate revenue and sales performance reports <br>
+✅ **New Order Notifications** – Real-time alerts when customers place orders <br>
 
 ## 🛠 Technologies Used
 - **Framework**: Laravel 12 (PHP 8.2)

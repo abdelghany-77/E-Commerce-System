@@ -15,9 +15,7 @@ class DashboardController extends Controller
 {
   public function __construct()
   {
-    // Get the timestamp when admin last viewed orders
     $lastViewedAt = session('last_orders_viewed_at');
-    // Count only orders created after admin's last view
     if ($lastViewedAt) {
       $newOrdersCount = Order::where('status', 'pending')
         ->where('created_at', '>', $lastViewedAt)
@@ -26,11 +24,13 @@ class DashboardController extends Controller
       // If never viewed, show all pending orders
       $newOrdersCount = Order::where('status', 'pending')->count();
     }
-    // Share the count with all views
     View::share('newOrdersCount', $newOrdersCount);
   }
   public function index()
   {
+    // Get total shipping fees not from database by logic
+    // $totalShippingFees =20;
+
     // Get counts for dashboard cards
     $totalOrders = Order::count();
     $pendingOrders = Order::where('status', 'pending')->count();
@@ -104,7 +104,8 @@ class DashboardController extends Controller
       'lowStockProducts',
       'outOfStockProducts',
       'mostPurchasedProducts',
-      'monthlySales'
+      'monthlySales',
+      // 'totalShippingFees',
     ));
   }
 }

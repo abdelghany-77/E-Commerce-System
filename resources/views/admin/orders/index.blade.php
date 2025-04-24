@@ -100,6 +100,8 @@
               <tr>
                 <th>Order #</th>
                 <th>Customer</th>
+                <th>Subtotal</th>
+                <th>Shipping</th>
                 <th>Total</th>
                 <th>Status</th>
                 <th>Date</th>
@@ -111,7 +113,15 @@
                 <tr>
                   <td>{{ $order->order_number }}</td>
                   <td>{{ $order->user->name }}</td>
-                  <td>${{ number_format($order->total_price, 2) }}</td>
+                  <td>${{ number_format($order->subtotal, 2) }}</td>
+                  <td>
+                    @if ($order->shipping_fee > 0)
+                      ${{ number_format($order->shipping_fee, 2) }}
+                    @else
+                      <span class="text-success">Free</span>
+                    @endif
+                  </td>
+                  <td>${{ number_format($order->total_price + $order->shipping_fee, 2) }}</td>
                   <td>
                     <span
                       class="badge bg-{{ $order->status == 'pending'

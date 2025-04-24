@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -16,7 +17,6 @@ class OrderController extends Controller
     session(['last_orders_viewed_at' => now()->toDateTimeString()]);
     // Reset the notification counter for the current view
     View::share('newOrdersCount', 0);
-
 
     $query = Order::with('user');
     // Filter by status
@@ -48,6 +48,19 @@ class OrderController extends Controller
     $query->orderBy($sortField, $sortDirection);
 
     $orders = $query->paginate(15)->withQueryString();
+
+    // Calculate subtotal and shipping_fee for each order (if not set)
+    foreach ($orders as $order) {
+      if (is_null($order->shipping_fee)) {
+        $subtotal = $order->items->sum(function ($item) {
+          return $item->price * $item->quantity;
+        });
+        $order->shipping_fee = ($subtotal <= 1000 && $subtotal > 0) ? 20 : 0;
+        $order->subtotal = $subtotal;
+      } else {
+        $order->subtotal = $order->total_price - $order->shipping_fee;
+      }
+    }
     // Get count of orders by status for dashboard statistics
     $orderCounts = [
       'all' => Order::count(),
@@ -63,6 +76,16 @@ class OrderController extends Controller
   public function show(Order $order)
   {
     $order->load(['user', 'items.product']);
+    // Check if the order is already loaded with items and product
+    if (is_null($order->shipping_fee)) {
+      $subtotal = $order->items->sum(function ($item) {
+        return $item->price * $item->quantity;
+      });
+      $order->shipping_fee = ($subtotal <= 1000 && $subtotal > 0) ? 20 : 0;
+      $order->subtotal = $subtotal;
+    } else {
+      $order->subtotal = $order->total_price - $order->shipping_fee;
+    }
     return view('admin.orders.show', compact('order'));
   }
 

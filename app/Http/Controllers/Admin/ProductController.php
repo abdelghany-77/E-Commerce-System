@@ -28,6 +28,7 @@ class ProductController extends Controller
       'name' => 'required|string|max:255',
       'description' => 'required',
       'price' => 'required|numeric|min:0',
+      'discount_price' => 'nullable|numeric|min:0',
       'stock' => 'required|integer|min:0',
       'categories' => 'array',
       'image' => 'nullable|image|max:2048',
@@ -38,6 +39,7 @@ class ProductController extends Controller
     $product->name = $validated['name'];
     $product->description = $validated['description'];
     $product->price = $validated['price'];
+    $product->discount_price = $validated['discount_price'];
     $product->stock = $validated['stock'];
     $product->is_active = $request->has('is_active');
 
@@ -69,6 +71,7 @@ class ProductController extends Controller
       'name' => 'required|string|max:255',
       'description' => 'required',
       'price' => 'required|numeric|min:0',
+      'discount_price' => 'nullable|numeric|min:0',
       'stock' => 'required|integer|min:0',
       'categories' => 'array',
       'image' => 'nullable|image|max:2048',
@@ -78,6 +81,7 @@ class ProductController extends Controller
     $product->name = $validated['name'];
     $product->description = $validated['description'];
     $product->price = $validated['price'];
+    $product->discount_price = $validated['discount_price'];
     $product->stock = $validated['stock'];
     $product->is_active = $request->has('is_active');
 

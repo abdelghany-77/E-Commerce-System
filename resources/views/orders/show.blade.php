@@ -52,7 +52,7 @@
                   <dd class="col-7">{{ ucfirst(str_replace('_', ' ', $order->payment_method)) }}</dd>
 
                   <dt class="col-5">Total Amount:</dt>
-                  <dd class="col-7 fw-bold">${{ number_format($order->total_price, 2) }}</dd>
+                  <dd class="col-7 fw-bold">${{ number_format($order->total_price + $order->shipping_fee, 2) }}</dd>
                 </dl>
               </div>
             </div>
@@ -193,7 +193,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <span>Shipping Fee:</span>
                 <span>
-                  @if($order->shipping_fee > 0)
+                  @if ($order->shipping_fee > 0)
                     ${{ number_format($order->shipping_fee, 2) }}
                   @else
                     <span class="text-success">Free</span>

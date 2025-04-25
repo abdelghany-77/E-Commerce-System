@@ -76,7 +76,7 @@
               </div>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="text-muted small">Total</div>
-                <div class="fw-bold">${{ number_format($order->total_price, 2) }}</div>
+                <div class="fw-bold">${{ number_format($order->total_price + $order->shipping_fee, 2) }}</div>
               </div>
 
               <a href="{{ route('orders.show', $order) }}" class="btn btn-outline-primary w-100">
@@ -128,7 +128,7 @@
                         <span class="text-success">Free</span>
                       @endif
                     </td>
-                    <td class="text-end">${{ number_format($order->total_price, 2) }}</td>
+                    <td class="text-end">${{ number_format($order->total_price + $order->shipping_fee, 2) }}</td>
                     <td class="text-end">
                       <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary">
                         Details <i class="fas fa-chevron-right ms-2"></i>

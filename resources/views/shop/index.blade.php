@@ -33,7 +33,7 @@
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown"
             data-bs-toggle="dropdown">
             Sort By:
-            @if(request('sort') == 'price_asc')
+            @if (request('sort') == 'price_asc')
               Price: Low to High
             @elseif(request('sort') == 'price_desc')
               Price: High to Low
@@ -63,21 +63,7 @@
           @foreach ($products as $product)
             <div class="col-md-4 mb-4">
               <div class="card product-card h-100">
-                @if ($product->image)
-                  <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top product-img"
-                    alt="{{ $product->name }}">
-                @else
-                  <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top product-img"
-                    alt="No Image">
-                @endif
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">{{ $product->name }}</h5>
-                  <p class="card-text text-truncate">{{ $product->description }}</p>
-                  <div class="mt-auto">
-                    <p class="fw-bold">${{ number_format($product->price, 2) }}</p>
-                    <a href="{{ route('shop.show', $product) }}" class="btn btn-primary btn-sm">View Details</a>
-                  </div>
-                </div>
+                @include('partials.product_card', ['product' => $product])
               </div>
             </div>
           @endforeach

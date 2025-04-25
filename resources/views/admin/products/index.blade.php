@@ -47,7 +47,14 @@
                     @endif
                   </td>
                   <td>{{ $product->name }}</td>
-                  <td>${{ number_format($product->price, 2) }}</td>
+                  <td>
+                    @if ($product->discount_price)
+                      <span class="text-decoration-line-through">${{ number_format($product->price, 2) }}</span>
+                      <span class="text-success">${{ number_format($product->discount_price, 2) }}</span>
+                    @else
+                      ${{ number_format($product->price, 2) }}
+                    @endif
+                  </td>
                   <td>{{ $product->stock }}</td>
                   <td>
                     @if ($product->is_active)

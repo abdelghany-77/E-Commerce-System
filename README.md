@@ -49,9 +49,9 @@ A **feature-rich E-commerce Platform** built with **Laravel 12** that enables us
 ## 📸 Screenshots
 ### ✨ Shop & Product Browsing
 **Shop Index Page Product Details Category View**
-![e1](https://github.com/user-attachments/assets/1ae1aadc-6016-49be-9b7f-0077a1122eb6)
-![e2](https://github.com/user-attachments/assets/993e0cc4-f185-499b-951d-8016e70c0b6f)
-![e14](https://github.com/user-attachments/assets/b449cbc8-4343-47fe-96d2-319324e4517d)
+![e14](https://github.com/user-attachments/assets/7c265149-43af-4759-ba96-5c1e96fb34c2)
+![e2](https://github.com/user-attachments/assets/e81c7165-f0e9-4e7c-b9e5-7671772eed73)
+![e1](https://github.com/user-attachments/assets/67e98e19-6e9c-46e1-8302-2a24299060cc)
 
 ### 🛒 Shopping Cart & Checkout
 **Cart Page Checkout Process Order Confirmation**

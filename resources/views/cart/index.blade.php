@@ -95,7 +95,7 @@
                       <th>Product</th>
                       <th>Price</th>
                       <th>Quantity</th>
-                      <th>Subtotal</th>
+                      {{-- <th>Subtotal</th> --}}
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -116,7 +116,18 @@
                             </a>
                           </div>
                         </td>
-                        <td class="align-middle">${{ number_format($item->product->price, 2) }}</td>
+                        <td class="align-middle">
+                          @if ($item->product->discount_price)
+                            <span class="text-decoration-line-through text-muted">
+                              ${{ number_format($item->product->price, 2) }}
+                            </span>
+                            <span class="text-danger fw-bold">
+                              ${{ number_format($item->product->discount_price, 2) }}
+                            </span>
+                          @else
+                            ${{ number_format($item->product->price, 2) }}
+                          @endif
+                        </td>
                         <td class="align-middle">
                           <form action="{{ route('cart.update', $item) }}" method="POST" class="d-inline">
                             @csrf
@@ -139,7 +150,7 @@
                             </button>
                           </form>
                         </td>
-                        <td class="align-middle fw-bold">${{ number_format($item->product->price * $item->quantity, 2) }}
+                        {{-- <td class="align-middle fw-bold">${{ number_format($item->product->price * $item->quantity, 2) }} --}}
                         </td>
                         <td class="align-middle">
                           <form action="{{ route('cart.remove', $item) }}" method="POST">

@@ -52,7 +52,7 @@
                   <dd class="col-7">{{ ucfirst(str_replace('_', ' ', $order->payment_method)) }}</dd>
 
                   <dt class="col-5">Total Amount:</dt>
-                  <dd class="col-7 fw-bold">${{ number_format($order->total_price + $order->shipping_fee, 2) }}</dd>
+                  <dd class="col-7 fw-bold">${{ number_format($order->total, 2) }}</dd>
                 </dl>
               </div>
             </div>
@@ -120,11 +120,23 @@
                       <div class="d-flex justify-content-between small text-muted">
                         <div>
                           <span class="d-block">Qty: {{ $item->quantity }}</span>
-                          <span class="d-block">${{ number_format($item->price, 2) }} each</span>
+                          @if ($item->product && $item->product->discount_price)
+                            <span class="d-block">
+                              <s>${{ number_format($item->product->price, 2) }}</s>
+                              <span class="text-danger">${{ number_format($item->product->discount_price, 2) }}
+                                each</span>
+                            </span>
+                          @else
+                            <span class="d-block">${{ number_format($item->price, 2) }} each</span>
+                          @endif
                         </div>
                         <div class="text-end">
                           <span class="d-block fw-bold text-dark">
-                            ${{ number_format($item->price * $item->quantity, 2) }}
+                            @if ($item->product && $item->product->discount_price)
+                              ${{ number_format($item->product->discount_price * $item->quantity, 2) }}
+                            @else
+                              ${{ number_format($item->price * $item->quantity, 2) }}
+                            @endif
                           </span>
                         </div>
                       </div>
@@ -172,8 +184,21 @@
                         @endif
                       </td>
                       <td class="text-center">{{ $item->quantity }}</td>
-                      <td class="text-end">${{ number_format($item->price, 2) }}</td>
-                      <td class="text-end fw-bold">${{ number_format($item->price * $item->quantity, 2) }}</td>
+                      <td class="text-end">
+                        @if ($item->product && $item->product->discount_price)
+                          <s class="text-muted">${{ number_format($item->product->price, 2) }}</s>
+                          <span class="text-danger">${{ number_format($item->product->discount_price, 2) }}</span>
+                        @else
+                          ${{ number_format($item->price, 2) }}
+                        @endif
+                      </td>
+                      <td class="text-end fw-bold">
+                        @if ($item->product && $item->product->discount_price)
+                          ${{ number_format($item->product->discount_price * $item->quantity, 2) }}
+                        @else
+                          ${{ number_format($item->price * $item->quantity, 2) }}
+                        @endif
+                      </td>
                     </tr>
                   @endforeach
                 </tbody>
@@ -187,7 +212,11 @@
               <div class="d-flex justify-content-between align-items-center">
                 <span>Subtotal:</span>
                 <span>
-                  ${{ number_format($order->total_price, 2) }}
+                  @if ($item->product && $item->product->discount_price)
+                    <span class="text-success">${{ number_format($item->product->discount_price, 2) }}</span>
+                  @else
+                    ${{ number_format($item->price, 2) }}
+                  @endif
                 </span>
               </div>
               <div class="d-flex justify-content-between align-items-center">

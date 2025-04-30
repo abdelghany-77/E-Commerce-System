@@ -22,7 +22,8 @@ class CheckoutController extends Controller
     }
 
     $total = $cartItems->sum(function ($item) {
-      return $item->product->price * $item->quantity;
+      $price = $item->product->discount_price ?? $item->product->price;
+      return $price * $item->quantity;
     });
     $shippingFee = ($total <= 1000 && $total > 0) ? 20 : 0;
     $grandTotal = $total + $shippingFee;

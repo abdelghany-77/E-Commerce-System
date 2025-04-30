@@ -96,7 +96,7 @@
                         <small class="text-muted">Qty: {{ $item->quantity }}</small>
                       </div>
                     </div>
-                    <span class="text-end">${{ number_format($item->product->price * $item->quantity, 2) }}</span>
+                    <span class="text-end">${{ number_format($total, 2) }}</span>
                   </div>
                 </div>
               @endforeach
